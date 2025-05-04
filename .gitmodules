@@ -1,0 +1,24 @@
+[submodule "services/product-service"]
+	path = services/product-service
+	url = ./services/product-service
+[submodule "services/cart-service"]
+	path = services/cart-service
+	url = ./services/cart-service
+[submodule "services/order-service"]
+	path = services/order-service
+	url = ./services/order-service
+[submodule "services/payment-service"]
+	path = services/payment-service
+	url = ./services/payment-service
+[submodule "services/notification-service"]
+	path = services/notification-service
+	url = ./services/notification-service
+[submodule "services/search-service"]
+	path = services/search-service
+	url = ./services/search-service
+[submodule "api-gateway"]
+	path = api-gateway
+	url = ./api-gateway
+[submodule "services/user-service"]
+	path = services/user-service
+	url = ./services/user-service
