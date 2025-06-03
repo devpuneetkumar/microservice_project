@@ -1,6 +1,6 @@
-[submodule "services/product-service"]
-	path = services/product-service
-	url = ./services/product-service
+[submodule "services/catalog-service"]
+	path = services/catalog-service
+	url = ./services/catalog-service
 [submodule "services/cart-service"]
 	path = services/cart-service
 	url = ./services/cart-service
@@ -22,3 +22,6 @@
 [submodule "services/user-service"]
 	path = services/user-service
 	url = ./services/user-service
+[submodule "services/queue-service"]
+	path = services/queue-service
+	url = ./services/queue-service

@@ -1,0 +1,126 @@
+services:
+    catalog-service:
+        build:
+            context: ./services/catalog-service
+        ports:
+            - "3001:3001"
+        volumes:
+            - ./services/catalog-service:/usr/src/app
+        command: npm start
+
+    queue-service:
+        build:
+            context: ./services/queue-service
+        ports:
+            - "3002:3002"
+        volumes:
+            - ./services/queue-service:/usr/src/app
+        command: npm start
+
+    redis:
+        build:
+            context: ./redis
+        container_name: redis
+        ports:
+            - "6379:6379"
+        deploy:
+            resources:
+                limits:
+                    memory: 1g
+
+    mysql:
+        image: mysql:8.0
+        container_name: mysql
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+            - MYSQL_ROOT_PASSWORD=
+            - MYSQL_USER=mysql
+            - MYSQL_PASSWORD=redhat
+        volumes:
+            - ./mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf
+            - ./mysql/data:/var/lib/mysql
+        ports:
+            - 3307:3306
+        deploy:
+            resources:
+                limits:
+                    memory: 1g
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        container_name: phpmyadmin
+        environment:
+            - PMA_USER=root
+            - PMA_PASSWORD=""
+            - PMA_HOST=mysql
+            - PMA_PORT=3307
+            - PMA_ARBITRARY=1
+            - PMA_ABSOLUTE_URI=1
+        ports:
+            - 8080:80
+        depends_on:
+            - mysql
+        volumes:
+            - ./phpmyadmin/config.inc.php:/etc/phpmyadmin/config.user.inc.php
+        deploy:
+            resources:
+                limits:
+                    memory: 1g
+
+    mongodb:
+        build:
+            context: ./mongo
+        container_name: mongodb
+        ports:
+            - "27017:27017"
+        deploy:
+            resources:
+                limits:
+                    memory: 1g
+
+    elasticsearch:
+        build:
+            context: ./elasticsearch
+        container_name: elasticsearch
+        environment:
+            - node.name=es01
+            - cluster.name=es-docker-cluster
+            - discovery.type=single-node
+            - xpack.security.enabled=false
+            - xpack.security.http.ssl.enabled=false
+            - ES_JAVA_OPTS=-Xms512m -Xmx512m
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        volumes:
+            - ./elasticsearch/data:/usr/share/elasticsearch/data
+        deploy:
+            resources:
+                limits:
+                    memory: 1g
+
+    kibana:
+        image: docker.elastic.co/kibana/kibana:8.13.0
+        container_name: kibana
+        ports:
+            - "5601:5601"
+        environment:
+            - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+            - SERVER_NAME=kibana
+            - ELASTICSEARCH_USERNAME=kibana_system
+            - ELASTICSEARCH_PASSWORD=redhat
+            - xpack.security.enabled=false
+        depends_on:
+            - elasticsearch
+        deploy:
+            resources:
+                limits:
+                    memory: 1g
+
+    maildev:
+        image: djfarrelly/maildev
+        container_name: maildev
+        ports:
+            - ${MAILDEV_PORT}:80
+
+    # Additional services can be added here following the same pattern.
