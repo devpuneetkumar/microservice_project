@@ -1,0 +1,21 @@
+{
+    "name": "microservcie_project",
+    "version": "1.0.0",
+    "description": "git clone --recurse-submodules <main_repository_url> # OR git clone <main_repository_url> cd <main_repository_directory> git submodule init git submodule update",
+    "main": "index.js",
+    "scripts": {
+        "dev": "concurrently \"npm run dev:catalog\" \"npm run dev:queue\"",
+        "dev:catalog": "cd services/catalog-service && npm run dev",
+        "dev:queue": "cd services/queue-service && npm run dev",
+        
+        "start": "concurrently \"npm run start:catalog\" \"npm run start:queue\"",
+        "start:catalog": "cd services/catalog-service && npm start",
+        "start:queue": "cd services/queue-service && npm start"
+    },
+    "devDependencies": {
+        "concurrently": "^8.0.0"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
