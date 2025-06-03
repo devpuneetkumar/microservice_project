@@ -1,6 +1,7 @@
 [submodule "services/catalog-service"]
 	path = services/catalog-service
-	url = ./services/catalog-service
+	url = https://github.com/devpuneetkumar/catalog-service.git
+	branch = master
 [submodule "services/cart-service"]
 	path = services/cart-service
 	url = ./services/cart-service
@@ -24,4 +25,5 @@
 	url = ./services/user-service
 [submodule "services/queue-service"]
 	path = services/queue-service
-	url = ./services/queue-service
+	url = https://github.com/devpuneetkumar/queue-service.git
+	branch = master
