@@ -32,6 +32,7 @@ services:
         image: mysql:8.0
         container_name: mysql
         environment:
+            - MYSQL_ROOT_HOST=%
             - MYSQL_ALLOW_EMPTY_PASSWORD=true
             - MYSQL_ROOT_PASSWORD=
             - MYSQL_USER=mysql
@@ -40,7 +41,7 @@ services:
             - ./mysql/custom.cnf:/etc/mysql/conf.d/custom.cnf
             - ./mysql/data:/var/lib/mysql
         ports:
-            - 3307:3306
+            - 3306:3306
         deploy:
             resources:
                 limits:
@@ -51,11 +52,10 @@ services:
         container_name: phpmyadmin
         environment:
             - PMA_USER=root
-            - PMA_PASSWORD=""
+            - PMA_PASSWORD=
+            - PMA_VERBOSE=true
             - PMA_HOST=mysql
-            - PMA_PORT=3307
-            - PMA_ARBITRARY=1
-            - PMA_ABSOLUTE_URI=1
+            - PMA_PORT=3306
         ports:
             - 8080:80
         depends_on:
@@ -122,5 +122,9 @@ services:
         container_name: maildev
         ports:
             - ${MAILDEV_PORT}:80
+        deploy:
+            resources:
+                limits:
+                    memory: 1g
 
     # Additional services can be added here following the same pattern.
