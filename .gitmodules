@@ -4,25 +4,32 @@
 	branch = master
 [submodule "services/cart-service"]
 	path = services/cart-service
-	url = ./services/cart-service
+	url = git@github.com:devpuneetkumar/cart-service.git
+	branch = master
 [submodule "services/order-service"]
 	path = services/order-service
-	url = ./services/order-service
+	url = git@github.com:devpuneetkumar/order-service.git
+	branch = master
 [submodule "services/payment-service"]
 	path = services/payment-service
-	url = ./services/payment-service
+	url = git@github.com:devpuneetkumar/payment-service.git
+	branch = master
 [submodule "services/notification-service"]
 	path = services/notification-service
-	url = ./services/notification-service
+	url = git@github.com:devpuneetkumar/notification-service.git
+	branch = master
 [submodule "services/search-service"]
 	path = services/search-service
-	url = ./services/search-service
+	url = git@github.com:devpuneetkumar/search-service.git
+	branch = master
 [submodule "api-gateway"]
 	path = api-gateway
-	url = ./api-gateway
+	url = git@github.com:devpuneetkumar/api-gateway.git
+	branch = master
 [submodule "services/user-service"]
 	path = services/user-service
-	url = ./services/user-service
+	url = git@github.com:devpuneetkumar/user-service.git
+	branch = master
 [submodule "services/queue-service"]
 	path = services/queue-service
 	url = git@github.com:devpuneetkumar/queue-service.git
